@@ -30,11 +30,8 @@ from .serializers import (
 )
 
 
-def home(request, id):
-    context = {
-        'user': model_to_dict(User.objects.get(id=id))
-    }
-    return render(request, 'main_page.html', context)
+def home(request):
+    return render(request, 'main_page.html')
 
 
 class RootApi(generics.GenericAPIView):
