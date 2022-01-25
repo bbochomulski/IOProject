@@ -1,0 +1,63 @@
+<form method="post">
+        <h1 class="my-5">Dodawanie Pracownika</h1>
+    <div class="field">
+        <label class="label">Imie</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="name" class="input" placeholder="Wpisz imie pracownika">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Nazwisko</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="surname" class="input" placeholder="Wpisz nazwisko pracownika">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Adres</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="address" class="input" placeholder="Wpisz adres pracownika">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="email" class="input" placeholder="Wpisz adres e-mail pracownika">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Pesel</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="pesel" class="input" placeholder="Wpisz pesel pracownika">
+            </label>
+        </div>
+    </div>
+    <div class="field">
+    <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="is_boss" value='do ustawienia' checked>
+                Stanowisko kierownicze
+            </label>
+    </div>
+    </div>
+        <div class="field is-grouped is-grouped-left">
+        <p class="control">
+            <button class="button is-primary" type="submit" name="submit">
+                Dodaj
+            </button>
+        </p>
+        <p class="control">
+            <a class="button is-light" href="employee_table.html">
+                Anuluj
+            </a>
+        </p>
+    </div>
+</form>

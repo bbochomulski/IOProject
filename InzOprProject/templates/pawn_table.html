@@ -1,0 +1,32 @@
+<table class="table is-striped is-fullwidth">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <td>Data</td>
+          <td>Kwota do spłacenia</td>
+          <td>Spłacona kwota</td>
+          <td>Kwota</td>
+          <td>Następna zapłata</td>
+          <td>Pracownik</td>
+          <td>Użytkownik</td>
+          <td>Produkt</td>
+          <td>Opcje</td>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.date}}</td>
+          <td>{{user.loan_to_pay}}</td>
+          <td>{{user.loan_paid}}</td>
+          <td>{{user.amount}}</td>
+          <td>{{user.next_payment}}</td>
+          <td>{{user.employee}}</td>
+          <td>{{user.user}}</td>
+          <td>{{user.product}}</td>
+
+          <td><a href="main_page.html" class="button is-warning">Edytuj</a>
+          <a href="main_page.html" class="button is-danger">Usuń</a></td>
+      </tr>
+  </tbody>
+</table>

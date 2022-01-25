@@ -1,0 +1,67 @@
+<form method="post">
+        <h1 class="my-5">Dodawanie Produktu</h1>
+    <div class="field">
+        <label class="label">Nazwa</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="name" class="input" placeholder="Wpisz nazwę">
+            </label>
+        </div>
+    </div>
+        <div class="field">
+        <label class="label">Kwota</label>
+        <div class="control">
+            <label>
+                <input type="text" autocomplete="off" name="amount" class="input" placeholder="Wpisz kwotę">
+            </label>
+        </div>
+    </div>
+    <label class="label">Kategoria</label>
+    <div class="field">
+        <div class="select" style="width: 100%">
+            <div class="control">
+                <label>
+                    <select style="width: 100%" name="category">
+                        {% for category in categories %}
+                        <option>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Opis produktu</label>
+        <div class="control">
+            <textarea class="textarea" name="description" placeholder="Wpisz opisu produktu">{{ product.description }}</textarea>
+        </div>
+    </div>
+
+    <label class="label">Transakcja</label>
+    <div class="field">
+        <div class="select" style="width: 100%">
+            <div class="control">
+                <label>
+                    <select style="width: 100%" name="transaction">
+                        {% for transaction in transactions %}
+                        <option>{{ transaction.amount }} {{ transaction.type }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+
+        <div class="field is-grouped is-grouped-left">
+        <p class="control">
+            <button class="button is-primary" type="submit" name="submit">
+                Dodaj
+            </button>
+        </p>
+        <p class="control">
+            <a class="button is-light" href="product_table.html">
+                Anuluj
+            </a>
+        </p>
+    </div>
+</form>
