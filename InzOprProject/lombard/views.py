@@ -1,6 +1,7 @@
 from django.forms import model_to_dict
+from django.http import HttpResponseRedirect
 from rest_framework import generics
-from django.views.generic import TemplateView
+from django.views.generic import View
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -30,17 +31,45 @@ from .serializers import (
 )
 
 
-def home(request, id=None):
-    users = list()
+# def home(request):
+#     return render(request, 'main_page.html')
+
+class Home(View):
+    def get(self, request):
+        return render(request, 'main_page.html')
+
+
+class EmployeeAdd(View):
+
+    def get(self, request):
+        return render(request, 'employee_add.html')
+
+    def post(self, request):
+        if request.method == 'POST':
+            user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'], address=request.POST['address'], email=request.POST['email'])
+            user.save()
+            if request.POST.get('is_boss') == 'on':
+                is_boss = True
+            else:
+                is_boss = False
+            employee = Employee.objects.create(user=user, pesel=request.POST['pesel'], is_boss=is_boss)
+            employee.save()
+        return HttpResponseRedirect(reverse('employee_table'))
+
+
+def employee_table(request, id=None):
+    employees = list()
     if id is None:
-        for user in User.objects.all():
-            users.append(model_to_dict(user))
+        for employee in Employee.objects.all():
+            employee_dict = model_to_dict(employee)
+            employee_dict['user'] = model_to_dict(User.objects.get(id=employee_dict['user']))
+            employees.append(employee_dict)
     else:
-        users.append(User.objects.get(id=id))
+        employees.append(User.objects.get(id=id))
     context = {
-        'users': users
+        'employees': employees
     }
-    return render(request, 'main_page.html', context)
+    return render(request, 'employee_table.html', context)
 
 
 class RootApi(generics.GenericAPIView):

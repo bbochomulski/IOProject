@@ -1,4 +1,8 @@
-<form method="post">
+{% extends 'main_page.html' %}
+
+{% block content %}
+<form method="post" action="{% url 'employee_add' %}">
+    {% csrf_token %}
         <h1 class="my-5">Dodawanie Pracownika</h1>
     <div class="field">
         <label class="label">Imie</label>
@@ -43,7 +47,7 @@
     <div class="field">
     <div class="control">
             <label class="checkbox">
-                <input type="checkbox" name="is_boss" value='do ustawienia' checked>
+                <input type="checkbox" name="is_boss" checked>
                 Stanowisko kierownicze
             </label>
     </div>
@@ -61,3 +65,4 @@
         </p>
     </div>
 </form>
+{% endblock %}

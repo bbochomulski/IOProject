@@ -18,8 +18,10 @@ from django.urls import path, include
 from lombard import views
 
 urlpatterns = [
-    path('', views.home, name='main'),
-    path('<int:id>', views.home, name='main'),
+    path('', views.Home.as_view(), name='home'),
+    path('employee_table', views.employee_table, name='employee_table'),
+    path('employee_add', views.EmployeeAdd.as_view(), name='employee_add'),
+    # path('<int:id>', views.home, name='main'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('lombard.urls'))
