@@ -30,8 +30,17 @@ from .serializers import (
 )
 
 
-def home(request):
-    return render(request, 'main_page.html')
+def home(request, id=None):
+    users = list()
+    if id is None:
+        for user in User.objects.all():
+            users.append(model_to_dict(user))
+    else:
+        users.append(User.objects.get(id=id))
+    context = {
+        'users': users
+    }
+    return render(request, 'main_page.html', context)
 
 
 class RootApi(generics.GenericAPIView):
