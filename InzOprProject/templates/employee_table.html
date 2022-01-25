@@ -1,3 +1,6 @@
+{% extends 'main_page.html' %}
+
+{% block content %}
 <table class="table is-striped is-fullwidth">
     <thead>
         <tr>
@@ -12,16 +15,19 @@
         </tr>
     </thead>
     <tbody>
+    {% for employee in employees %}
         <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.surname}}</td>
-            <td>{{user.address}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.pesel}}</td>
-            <td>{{user.is_boss}}</td>
+            <td>{{employee.id}}</td>
+            <td>{{employee.user.name}}</td>
+            <td>{{employee.user.surname}}</td>
+            <td>{{employee.user.address}}</td>
+            <td>{{employee.user.email}}</td>
+            <td>{{employee.pesel}}</td>
+            <td>{{employee.is_boss}}</td>
             <td><a href="main_page.html" class="button is-warning">Edytuj</a>
             <a href="main_page.html" class="button is-danger">Usuń</a></td>
         </tr>
+    {% endfor %}
     </tbody>
 </table>
+{% endblock %}

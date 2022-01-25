@@ -29,8 +29,8 @@
 
                 <aside class="menu">
                     <ul class="menu-list" style="line-height: 3">
-                        <li><a class="button is-primary is-light is-outlined my-4">Panel zarządzania </a></li>
-                        <li><a class="button is-primary is-light is-outlined my-4">Lista pracowników</a></li>
+                        <li><a href="{% url 'home' %}" class="button is-primary is-light is-outlined my-4">Panel zarządzania </a></li>
+                        <li><a href="{% url 'employee_table' %}" class="button is-primary is-light is-outlined my-4">Lista pracowników</a></li>
                         <li><a class="button is-primary is-light is-outlined my-4">Lista specjalistów </a></li>
                         <li><a class="button is-primary is-light is-outlined my-4">Lista produktów</a></li>
                         <li><a class="button is-primary is-light is-outlined my-4">Lista wycen</a></li>
@@ -42,97 +42,9 @@
             </div>
             <div class="column is-four-fifth">
 
-<!--                <table class="table is-striped is-fullwidth">-->
-<!--                    <thead>-->
-<!--                        <tr>-->
-<!--                            <th>ID</th>-->
-<!--                            <td>Name</td>-->
-<!--                            <td>Surname</td>-->
-<!--                            <td>Address</td>-->
-<!--                            <td>Email</td>-->
-<!--                            <td>Options</td>-->
-<!--                        </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                        <tr>-->
-<!--                            <td>{{user.id}}</td>-->
-<!--                            <td>{{user.name}}</td>-->
-<!--                            <td>{{user.surname}}</td>-->
-<!--                            <td>{{user.address}}</td>-->
-<!--                            <td>{{user.email}}</td>-->
-<!--                            <td><a href="main_page.html" class="button is-warning">Edytuj</a>-->
-<!--                            <a href="main_page.html" class="button is-danger">Usuń</a></td>-->
-<!--                        </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<form method="post">
-        <h1 class="my-5">Dodawanie Spotkania</h1>
-    <div class="field">
-        <label class="label">Data</label>
-        <div class="control">
-            <label>
-                <input type="text" autocomplete="off" name="date_from" class="input" placeholder="Wpisz date">
-            </label>
-        </div>
-        <p class="help">Poprawny format to d-m-y H:I np. 12.01.2022 15:30</p>
-    </div>
-    <label class="label">Pracownik</label>
-    <div class="field">
-        <div class="select" style="width: 100%">
-            <div class="control">
-                <label>
-                    <select style="width: 100%" name="employee">
-                        {% for employee in employees %}
-                        <option>{{ employee.name }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
-    <label class="label">Użytkownik</label>
-    <div class="field">
-        <div class="select" style="width: 100%">
-            <div class="control">
-                <label>
-                    <select style="width: 100%" name="user">
-                        {% for product in products %}
-                        <option>{{ product.name }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
-    <label class="label">Użytkownik</label>
-    <div class="field">
-        <div class="select" style="width: 100%">
-            <div class="control">
-                <label>
-                    <select style="width: 100%" name="user">
-                        {% for user in users %}
-                        <option>{{ user.name }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
+                {% block content %}
 
-
-        <div class="field is-grouped is-grouped-left">
-        <p class="control">
-            <button class="button is-primary" type="submit" name="submit">
-                Dodaj
-            </button>
-        </p>
-        <p class="control">
-            <a class="button is-light" href="reservation_table.html">
-                Anuluj
-            </a>
-        </p>
-    </div>
-</form>
+                {% endblock %}
 
             </div>
         </div>
