@@ -1,10 +1,14 @@
+{% extends 'main_page.html' %}
+
+{% block content %}
 <form method="post">
+    {% csrf_token %}
         <h1 class="my-5">Dodawanie Spotkania</h1>
     <div class="field">
         <label class="label">Data</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="date_from" class="input" placeholder="Wpisz date">
+                <input type="text" autocomplete="off" name="date" class="input" placeholder="Wpisz date">
             </label>
         </div>
         <p class="help">Poprawny format to d-m-y H:I np. 12.01.2022 15:30</p>
@@ -16,21 +20,7 @@
                 <label>
                     <select style="width: 100%" name="employee">
                         {% for employee in employees %}
-                        <option>{{ employee.name }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
-    <label class="label">Użytkownik</label>
-    <div class="field">
-        <div class="select" style="width: 100%">
-            <div class="control">
-                <label>
-                    <select style="width: 100%" name="user">
-                        {% for product in products %}
-                        <option>{{ product.name }}</option>
+                        <option value="{{ employee.user.id }}">{{ employee.user.name }} {{ employee.user.surname }}</option>
                         {% endfor %}
                     </select>
                 </label>
@@ -44,7 +34,21 @@
                 <label>
                     <select style="width: 100%" name="user">
                         {% for user in users %}
-                        <option>{{ user.name }}</option>
+                        <option value="{{ user.id }}">{{ user.name }} {{ user.surname }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    <label class="label">Specjalista</label>
+    <div class="field">
+        <div class="select" style="width: 100%">
+            <div class="control">
+                <label>
+                    <select style="width: 100%" name="expert">
+                        {% for expert in experts %}
+                        <option value="{{ expert.id }}">{{ expert.name }} {{ expert.surname }}</option>
                         {% endfor %}
                     </select>
                 </label>
@@ -60,9 +64,10 @@
             </button>
         </p>
         <p class="control">
-            <a class="button is-light" href="reservation_table.html">
+            <a class="button is-light" href="reservation_table">
                 Anuluj
             </a>
         </p>
     </div>
 </form>
+{% endblock %}

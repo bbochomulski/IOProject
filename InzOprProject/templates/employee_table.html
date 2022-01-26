@@ -1,6 +1,7 @@
 {% extends 'main_page.html' %}
 
 {% block content %}
+<a href="employee_add" class=" button is-primary my-4">Dodaj pracownika</a>
 <form method="post" id="form" action="{% url 'employee_edit' %}">{% csrf_token %}</form>
 <table class="table is-striped is-fullwidth">
     <thead>

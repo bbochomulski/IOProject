@@ -115,6 +115,52 @@ class EmployeeTable(View):
             print(f"ID do edycji: {request.POST['edit']}")
         return render(request, 'employee_table.html')
 
+class AppointmentAdd(View):
+
+    def get(self, request):
+        employees = list()
+        users = list()
+        experts = list()
+        for employee in Employee.objects.all():
+            employee = model_to_dict(employee)
+            user = model_to_dict(User.objects.get(id=employee['user']))
+            employee['user'] = user
+            employees.append(employee)
+        for user in User.objects.all():
+            users.append(model_to_dict(user))
+        for expert in Expert.objects.all():
+            experts.append(model_to_dict(expert))
+        context = {
+            'employees': employees,
+            'users': users,
+            'experts': experts
+        }
+        return render(request, 'appointment_add.html', context)
+
+    def post(self, request):
+        if request.method == 'POST':
+
+            print(f":pracownik{request.POST['employee']}")
+            employee = Employee.objects.get(id=request.POST['employee'])
+            user = User.objects.get(id=request.POST['user'])
+            expert = Expert.objects.get(id=request.POST['expert'])
+            appointment = Appointment.objects.create(date=request.POST['date'], employee=employee, user=user, expert=expert)
+            appointment.save()
+
+        return HttpResponseRedirect(reverse('appointment_table'))
+
+class AppointmentTable(View):
+
+    def get(self, request):
+        appointments = list()
+        users = list()
+        experts = list()
+        for appointment in Appointment.objects.all():
+            appointments.append(appointment)
+        context = {
+            'appointments': appointments
+        }
+        return render(request, 'appointment_table.html', context)
 
 class RootApi(generics.GenericAPIView):
     name = 'root-api'

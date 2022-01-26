@@ -22,6 +22,8 @@ urlpatterns = [
     path('employee_table', views.EmployeeTable.as_view(), name='employee_table'),
     path('employee_add', views.EmployeeAdd.as_view(), name='employee_add'),
     path('employee_edit', views.EmployeeEdit.as_view(), name='employee_edit'),
+    path('appointment_table', views.AppointmentTable.as_view(), name='appointment_table'),
+    path('appointment_add', views.AppointmentAdd.as_view(), name='appointment_add'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('lombard.urls'))

@@ -1,3 +1,7 @@
+{% extends 'main_page.html' %}
+
+{% block content %}
+<a href="appointment_add" class=" button is-primary my-4">Dodaj spotkanie</a>
 <table class="table is-striped is-fullwidth">
     <thead>
         <tr>
@@ -10,15 +14,18 @@
         </tr>
     </thead>
     <tbody>
+    {% for appointment in appointments %}
         <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.date}}</td>
-            <td>{{user.employee}}</td>
-            <td>{{user.user}}</td>
-            <td>{{user.expert}}</td>
+            <td>{{appointment.id}}</td>
+            <td>{{appointment.date}}</td>
+            <td>{{appointment.employee}}</td>
+            <td>{{appointment.user}}</td>
+            <td>{{appointment.expert.name}} {{appointment.expert.surname}}</td>
 
             <td><a href="main_page.html" class="button is-warning">Edytuj</a>
             <a href="main_page.html" class="button is-danger">Usuń</a></td>
         </tr>
+    {% endfor %}
     </tbody>
 </table>
+{% endblock %}
