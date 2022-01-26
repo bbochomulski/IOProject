@@ -212,15 +212,20 @@ class AppointmentAdd(View):
 class AppointmentTable(View):
 
     def get(self, request):
+
         appointments = list()
-        users = list()
-        experts = list()
+
         for appointment in Appointment.objects.all():
             appointments.append(appointment)
         context = {
             'appointments': appointments
         }
         return render(request, 'appointment_table.html', context)
+
+    def post(self, request):
+        if "delete" in request.POST:
+            Appointment.objects.get(id=request.POST['delete']).delete()
+        return HttpResponseRedirect(reverse('appointment_table'))
 
 class RootApi(generics.GenericAPIView):
     name = 'root-api'

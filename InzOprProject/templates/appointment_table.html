@@ -2,6 +2,7 @@
 
 {% block content %}
 <a href="appointment_add" class=" button is-primary my-4">Dodaj spotkanie</a>
+<form method="post" id="form">{% csrf_token %}</form>
 <table class="table is-striped is-fullwidth">
     <thead>
         <tr>
@@ -23,7 +24,7 @@
             <td>{{appointment.expert.name}} {{appointment.expert.surname}}</td>
 
             <td><a href="main_page.html" class="button is-warning">Edytuj</a>
-            <a href="main_page.html" class="button is-danger">Usuń</a></td>
+            <button type="submit" form="form" name="delete" value="{{appointment.id}}" class="button is-danger">Usuń</button></td>
         </tr>
     {% endfor %}
     </tbody>
