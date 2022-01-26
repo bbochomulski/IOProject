@@ -24,6 +24,7 @@ urlpatterns = [
     path('employee_edit', views.EmployeeEdit.as_view(), name='employee_edit'),
     path('appointment_table', views.AppointmentTable.as_view(), name='appointment_table'),
     path('appointment_add', views.AppointmentAdd.as_view(), name='appointment_add'),
+    path('appointment_edit', views.AppointmentEdit.as_view(), name='appointment_edit'),
     path('user_table', views.UserTable.as_view(), name='user_table'),
     path('user_add', views.UserAdd.as_view(), name='user_add'),
     path('user_edit', views.UserEdit.as_view(), name='user_edit'),

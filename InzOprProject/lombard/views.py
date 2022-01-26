@@ -229,7 +229,26 @@ class AppointmentTable(View):
 
 class AppointmentEdit(View):
     def get(self, request):
-        return HttpResponseRedirect(reverse('appointment_table'))
+        employees = list()
+        users = list()
+        experts = list()
+        for employee in Employee.objects.all():
+            employee = model_to_dict(employee)
+            user = model_to_dict(User.objects.get(id=employee['user']))
+            employee['user'] = user
+            employees.append(employee)
+        for user in User.objects.all():
+            users.append(model_to_dict(user))
+        for expert in Expert.objects.all():
+            experts.append(model_to_dict(expert))
+        print(users)
+        context = {
+            'employees': employees,
+            'users': users,
+            'experts': experts
+        }
+        return render(request, 'appointment_edit.html', context)
+
     def post(self, request):
         data = request.POST
         if "save" in request.POST:
@@ -241,6 +260,9 @@ class AppointmentEdit(View):
             appointment.save()
             return HttpResponseRedirect(reverse('appointment_table'))
 
+        if "delete" in request.POST:
+            Appointment.objects.get(id=request.POST['delete']).delete()
+            return HttpResponseRedirect(reverse('appointment_table'))
         id = data['edit']
         appointment = model_to_dict(Appointment.objects.get(id=id))
         context = {
