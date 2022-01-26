@@ -1,10 +1,14 @@
+{% extends 'main_page.html' %}
+
+{% block content %}
 <form method="post">
+    {% csrf_token %}
         <h1 class="my-5">Dodawanie Użytkownika</h1>
     <div class="field">
         <label class="label">Imie</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="name" class="input" placeholder="Wpisz imie użytkownika">
+                <input type="text" autocomplete="off" name="name" class="input" placeholder="Wpisz imie pracownika">
             </label>
         </div>
     </div>
@@ -12,7 +16,7 @@
         <label class="label">Nazwisko</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="surname" class="input" placeholder="Wpisz nazwisko użytkownika">
+                <input type="text" autocomplete="off" name="surname" class="input" placeholder="Wpisz nazwisko pracownika">
             </label>
         </div>
     </div>
@@ -20,7 +24,7 @@
         <label class="label">Adres</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="address" class="input" placeholder="Wpisz adres użytkownika">
+                <input type="text" autocomplete="off" name="address" class="input" placeholder="Wpisz adres pracownika">
             </label>
         </div>
     </div>
@@ -28,20 +32,21 @@
         <label class="label">Email</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="email" class="input" placeholder="Wpisz adres e-mail użytkownika">
+                <input type="text" autocomplete="off" name="email" class="input" placeholder="Wpisz adres e-mail pracownika">
             </label>
         </div>
     </div>
-        <div class="field is-grouped is-grouped-left">
-        <p class="control">
-            <button class="button is-primary" type="submit" name="submit">
-                Dodaj
-            </button>
-        </p>
-        <p class="control">
-            <a class="button is-light" href="user_table.html">
-                Anuluj
-            </a>
-        </p>
+    <div class="field is-grouped is-grouped-left">
+    <p class="control">
+        <button class="button is-primary" type="submit" name="submit">
+            Utwórz
+        </button>
+    </p>
+    <p class="control">
+        <a class="button is-light" href="user_table.html">
+            Anuluj
+        </a>
+    </p>
     </div>
 </form>
+{% endblock %}

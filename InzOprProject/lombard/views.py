@@ -39,6 +39,60 @@ class Home(View):
         return render(request, 'main_page.html')
 
 
+class UserAdd(View):
+
+    def get(self, request):
+        return render(request, 'user_add.html')
+
+    def post(self, request):
+        user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'], address=request.POST['address'], email=request.POST['email'])
+        user.save()
+        return HttpResponseRedirect(reverse('user_table'))
+
+
+class UserTable(View):
+
+    def get(self, request):
+        users = list()
+        for user in User.objects.all():
+            users.append(model_to_dict(user))
+        context = {
+            'users': users
+        }
+        return render(request, 'user_table.html', context)
+
+    def post(self, request):
+        return render(request, 'employee_table.html')
+
+
+class UserEdit(View):
+
+    def get(self, request):
+        return HttpResponseRedirect(reverse('user_table'))
+
+    def post(self, request):
+        data = request.POST
+        if "save" in request.POST:
+            user = User.objects.get(id=data['save'])
+            user.name = data['name']
+            user.surname = data['surname']
+            user.address = data['address']
+            user.email = data['email']
+            user.save()
+            return HttpResponseRedirect(reverse('user_table'))
+
+        if "delete" in request.POST:
+            User.objects.get(id=data['delete']).delete()
+            return HttpResponseRedirect(reverse('user_table'))
+
+        id = data['edit']
+        user = model_to_dict(User.objects.get(id=id))
+        context = {
+            'user': user
+        }
+        return render(request, 'user_edit.html', context)
+
+
 class EmployeeAdd(View):
 
     def get(self, request):
@@ -82,7 +136,9 @@ class EmployeeEdit(View):
             return HttpResponseRedirect(reverse('employee_table'))
 
         if "delete" in request.POST:
-            Employee.objects.get(id=data['delete']).delete()
+            employee = Employee.objects.get(id=data['delete'])
+            employee.user.delete()
+            employee.delete()
             return HttpResponseRedirect(reverse('employee_table'))
 
         id = data['edit']

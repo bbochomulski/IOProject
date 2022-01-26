@@ -22,6 +22,9 @@ urlpatterns = [
     path('employee_table', views.EmployeeTable.as_view(), name='employee_table'),
     path('employee_add', views.EmployeeAdd.as_view(), name='employee_add'),
     path('employee_edit', views.EmployeeEdit.as_view(), name='employee_edit'),
+    path('user_table', views.UserTable.as_view(), name='user_table'),
+    path('user_add', views.UserAdd.as_view(), name='user_add'),
+    path('user_edit', views.UserEdit.as_view(), name='user_edit'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('lombard.urls'))
