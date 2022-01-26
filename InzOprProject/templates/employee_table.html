@@ -1,6 +1,7 @@
 {% extends 'main_page.html' %}
 
 {% block content %}
+<form method="post" id="form" action="{% url 'employee_edit' %}">{% csrf_token %}</form>
 <table class="table is-striped is-fullwidth">
     <thead>
         <tr>
@@ -23,9 +24,9 @@
             <td>{{employee.user.address}}</td>
             <td>{{employee.user.email}}</td>
             <td>{{employee.pesel}}</td>
-            <td>{{employee.is_boss}}</td>
-            <td><a href="main_page.html" class="button is-warning">Edytuj</a>
-            <a href="main_page.html" class="button is-danger">Usuń</a></td>
+            <td>{% if employee.is_boss == True %}Tak{% else %}Nie{% endif %}</td>
+            <td><button type="submit" form="form" name="edit" value="{{employee.id}}" class="button is-warning">Edytuj</button>
+            <button type="submit" form="form" name="delete" value="{{employee.id}}" class="button is-danger">Usuń</button></td>
         </tr>
     {% endfor %}
     </tbody>

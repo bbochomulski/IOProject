@@ -3,12 +3,12 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-        <h1 class="my-5">Dodawanie Pracownika</h1>
+        <h1 class="my-5">Edycja Pracownika</h1>
     <div class="field">
         <label class="label">Imie</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="name" class="input" placeholder="Wpisz imie pracownika">
+                <input type="text" autocomplete="off" name="name" class="input" value="{{employee.user.name}}">
             </label>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <label class="label">Nazwisko</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="surname" class="input" placeholder="Wpisz nazwisko pracownika">
+                <input type="text" autocomplete="off" name="surname" class="input" value="{{employee.user.surname}}">
             </label>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <label class="label">Adres</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="address" class="input" placeholder="Wpisz adres pracownika">
+                <input type="text" autocomplete="off" name="address" class="input" value="{{employee.user.address}}">
             </label>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <label class="label">Email</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="email" class="input" placeholder="Wpisz adres e-mail pracownika">
+                <input type="text" autocomplete="off" name="email" class="input" value="{{employee.user.email}}">
             </label>
         </div>
     </div>
@@ -40,22 +40,22 @@
         <label class="label">Pesel</label>
         <div class="control">
             <label>
-                <input type="text" autocomplete="off" name="pesel" class="input" placeholder="Wpisz pesel pracownika">
+                <input type="text" autocomplete="off" name="pesel" class="input" value="{{employee.pesel}}">
             </label>
         </div>
     </div>
     <div class="field">
     <div class="control">
             <label class="checkbox">
-                <input type="checkbox" name="is_boss" checked>
+                <input type="checkbox" name="is_boss" {% if employee.is_boss == True %}checked{% endif %}>
                 Stanowisko kierownicze
             </label>
     </div>
     </div>
         <div class="field is-grouped is-grouped-left">
         <p class="control">
-            <button class="button is-primary" type="submit" name="submit">
-                Dodaj
+            <button class="button is-primary" type="submit" name="save" value="{{employee.id}}">
+                Zapisz
             </button>
         </p>
         <p class="control">

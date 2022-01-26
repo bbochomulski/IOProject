@@ -30,9 +30,9 @@ from .serializers import (
     PawnSerializer
 )
 
+# for key, value in data.items():
+#     print(f"{key} = {value}")
 
-# def home(request):
-#     return render(request, 'main_page.html')
 
 class Home(View):
     def get(self, request):
@@ -57,19 +57,63 @@ class EmployeeAdd(View):
         return HttpResponseRedirect(reverse('employee_table'))
 
 
-def employee_table(request, id=None):
-    employees = list()
-    if id is None:
+class EmployeeEdit(View):
+
+    def get(self, request):
+        return HttpResponseRedirect(reverse('employee_table'))
+
+    def post(self, request):
+        data = request.POST
+        if "save" in request.POST:
+            employee = Employee.objects.get(id=data['save'])
+            user = User.objects.get(id=employee.user_id)
+            user.name = data['name']
+            user.surname = data['surname']
+            user.address = data['address']
+            user.email = data['email']
+            user.save()
+            employee.user = user
+            employee.pesel = data['pesel']
+            if 'is_boss' in data:
+                employee.is_boss = True
+            else:
+                employee.is_boss = False
+            employee.save()
+            return HttpResponseRedirect(reverse('employee_table'))
+
+        if "delete" in request.POST:
+            Employee.objects.get(id=data['delete']).delete()
+            return HttpResponseRedirect(reverse('employee_table'))
+
+        id = data['edit']
+        employee = model_to_dict(Employee.objects.get(id=id))
+        user = model_to_dict(User.objects.get(id=employee['user']))
+        employee['user'] = user
+        context = {
+            'employee': employee
+        }
+        return render(request, 'employee_edit.html', context)
+
+
+class EmployeeTable(View):
+
+    def get(self, request):
+        employees = list()
         for employee in Employee.objects.all():
             employee_dict = model_to_dict(employee)
             employee_dict['user'] = model_to_dict(User.objects.get(id=employee_dict['user']))
             employees.append(employee_dict)
-    else:
-        employees.append(User.objects.get(id=id))
-    context = {
-        'employees': employees
-    }
-    return render(request, 'employee_table.html', context)
+        context = {
+            'employees': employees
+        }
+        return render(request, 'employee_table.html', context)
+
+    def post(self, request):
+        if "delete" in request.POST:
+            print(f"ID do usuniecia: {request.POST['delete']}")
+        if "edit" in request.POST:
+            print(f"ID do edycji: {request.POST['edit']}")
+        return render(request, 'employee_table.html')
 
 
 class RootApi(generics.GenericAPIView):
