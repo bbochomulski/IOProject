@@ -30,6 +30,7 @@ from .serializers import (
     PawnSerializer
 )
 
+
 # for key, value in data.items():
 #     print(f"{key} = {value}")
 
@@ -45,7 +46,8 @@ class UserAdd(View):
         return render(request, 'user_add.html')
 
     def post(self, request):
-        user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'], address=request.POST['address'], email=request.POST['email'])
+        user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'],
+                                   address=request.POST['address'], email=request.POST['email'])
         user.save()
         return HttpResponseRedirect(reverse('user_table'))
 
@@ -63,6 +65,7 @@ class UserTable(View):
 
     def post(self, request):
         return render(request, 'employee_table.html')
+
 
 
 class UserEdit(View):
@@ -100,7 +103,8 @@ class EmployeeAdd(View):
 
     def post(self, request):
         if request.method == 'POST':
-            user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'], address=request.POST['address'], email=request.POST['email'])
+            user = User.objects.create(name=request.POST['name'], surname=request.POST['surname'],
+                                       address=request.POST['address'], email=request.POST['email'])
             user.save()
             if request.POST.get('is_boss') == 'on':
                 is_boss = True
@@ -259,6 +263,7 @@ class AppointmentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     name = 'appointment-detail'
+
 
 class PawnListView(generics.ListCreateAPIView):
     queryset = Pawn.objects.all()
