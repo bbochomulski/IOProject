@@ -227,6 +227,27 @@ class AppointmentTable(View):
             Appointment.objects.get(id=request.POST['delete']).delete()
         return HttpResponseRedirect(reverse('appointment_table'))
 
+class AppointmentEdit(View):
+    def get(self, request):
+        return HttpResponseRedirect(reverse('appointment_table'))
+    def post(self, request):
+        data = request.POST
+        if "save" in request.POST:
+            appointment = Appointment.objects.get(id=data['save'])
+            appointment.date = data['date']
+            appointment.employee = data['employee']
+            appointment.user = data['user']
+            appointment.expert = data['expert']
+            appointment.save()
+            return HttpResponseRedirect(reverse('appointment_table'))
+
+        id = data['edit']
+        appointment = model_to_dict(Appointment.objects.get(id=id))
+        context = {
+            'appointment': appointment
+        }
+        return render(request, 'appointment_edit.html', context)
+
 class RootApi(generics.GenericAPIView):
     name = 'root-api'
 
